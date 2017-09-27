@@ -1,14 +1,86 @@
-<!DOCTYPE html>
-<html><head>
-    <title>HTML5 code Reader</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<!--<!doctype html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+    <!--<meta charset="UTF-8">-->
+    <!--<meta name="viewport"-->
+          <!--content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">-->
+    <!--<meta http-equiv="X-UA-Compatible" content="ie=edge">-->
+    <!--<title>识别二维码</title>-->
+    <!--<script src="qrcode.min.js"></script>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div id="rcode"></div>-->
+<!--</body>-->
+<!--</html>-->
+<!--<script>-->
+    <!--var qrcodes=new QRCode(document.getElementById("rcode"),{-->
+        <!--width:100,-->
+        <!--height:100-->
+    <!--})-->
+    <!--function makeCode4() {-->
+        <!--var slText='冯浩';-->
+        <!--qrcodes.makeCode(slText);-->
+    <!--}-->
+    <!--makeCode4();-->
+<!--</script>-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
 </head>
-<style type="text/css">
-    html, body { height: 100%; width: 100%; text-align:center; }
+<style>
+    #video {
+        display: block;
+        margin:1em auto;
+        width:180px;
+        height:180px;
+    }
 </style>
-<script src="jquery.min.js"></script>
 <body>
-<input type="file" accept="image/*" capture="camera" accept=".jpeg,.jpg,.gif,.png">
-<input type="file" accept="image/*" capture="camera">
+    <video id="video" autoplay></video>
 </body>
 </html>
+<script>
+    window.addEventListener("DOMContentLoaded", function () {
+        var video = document.getElementById("video"), canvas, context;
+        try {
+            canvas = document.createElement("canvas");
+            context = canvas.getContext("2d");
+        } catch (e) { alert("not support canvas!"); return; }
+        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+
+
+        if (navigator.getUserMedia)
+            navigator.getUserMedia(
+                { "video": true },
+                function (stream) {
+                    if (video.mozSrcObject !== undefined)video.mozSrcObject = stream;
+                    else video.src = ((window.URL || window.webkitURL || window.mozURL || window.msURL) && window.URL.createObjectURL(stream)) || stream;
+                    video.play();
+                },
+                function (error) {
+                    //if(error.PERMISSION_DENIED)console.log("用户拒绝了浏览器请求媒体的权限",error.code);
+                    //if(error.NOT_SUPPORTED_ERROR)console.log("当前浏览器不支持拍照功能",error.code);
+                    //if(error.MANDATORY_UNSATISFIED_ERROR)console.log("指定的媒体类型未接收到媒体流",error.code);
+                    alert("Video capture error: " + error.code);
+                }
+            );
+        else alert("Native device media streaming (getUserMedia) not supported in this browser");
+
+
+
+        setInterval(function () {
+            context.drawImage(video, 0, 0, canvas.width = video.videoWidth, canvas.height = video.videoHeight);
+            $.post('/Home/QRcodeDecode', { "img": canvas.toDataURL().substr(22) }, function (data, status) {
+                if (status == "success" && data != "no")location.href = "/Home/Result/" + data;
+            }, "text");
+        }, 500);
+
+
+    }, false);
+</script>

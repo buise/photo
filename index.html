@@ -5,7 +5,7 @@
     <!--<meta name="viewport"-->
           <!--content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">-->
     <!--<meta http-equiv="X-UA-Compatible" content="ie=edge">-->
-    <!--<title>è¯†åˆ«äºŒç»´ç </title>-->
+    <!--<title>Ê¶±ğ¶şÎ¬Âë</title>-->
     <!--<script src="qrcode.min.js"></script>-->
 <!--</head>-->
 <!--<body>-->
@@ -18,69 +18,108 @@
         <!--height:100-->
     <!--})-->
     <!--function makeCode4() {-->
-        <!--var slText='å†¯æµ©';-->
+        <!--var slText='·ëºÆ';-->
         <!--qrcodes.makeCode(slText);-->
     <!--}-->
     <!--makeCode4();-->
 <!--</script>-->
 
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<style>
-    #video {
-        display: block;
-        margin:1em auto;
-        width:180px;
-        height:180px;
-    }
-</style>
-<body>
-    <video id="video" autoplay></video>
-</body>
-</html>
-<script>
-    window.addEventListener("DOMContentLoaded", function () {
-        var video = document.getElementById("video"), canvas, context;
-        try {
-            canvas = document.createElement("canvas");
-            context = canvas.getContext("2d");
-        } catch (e) { alert("not support canvas!"); return; }
-        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>È¥ÂÃÓÎÍøappÏÂÔØ</title>
+    <script type="text/javascript" src="http://cn.taketours.com/js/jquery.js"></script>
 
 
-        if (navigator.getUserMedia)
-            navigator.getUserMedia(
-                { "video": true },
-                function (stream) {
-                    if (video.mozSrcObject !== undefined)video.mozSrcObject = stream;
-                    else video.src = ((window.URL || window.webkitURL || window.mozURL || window.msURL) && window.URL.createObjectURL(stream)) || stream;
-                    video.play();
-                },
-                function (error) {
-                    //if(error.PERMISSION_DENIED)console.log("ç”¨æˆ·æ‹’ç»äº†æµè§ˆå™¨è¯·æ±‚åª’ä½“çš„æƒé™",error.code);
-                    //if(error.NOT_SUPPORTED_ERROR)console.log("å½“å‰æµè§ˆå™¨ä¸æ”¯æŒæ‹ç…§åŠŸèƒ½",error.code);
-                    //if(error.MANDATORY_UNSATISFIED_ERROR)console.log("æŒ‡å®šçš„åª’ä½“ç±»å‹æœªæ¥æ”¶åˆ°åª’ä½“æµ",error.code);
-                    alert("Video capture error: " + error.code);
+    <script type="text/javascript">
+        var bForcepc = fGetQuery("dv") == "pc";
+        function fBrowserRedirect(){
+
+            var sUserAgent = navigator.userAgent.toLowerCase();
+            var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+            var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+            var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+            var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+            var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+            var bIsAndroid = sUserAgent.match(/android/i) == "android";
+            var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+            var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+            if(bIsIpad){
+                var sUrl = location.href;
+                if(!bForcepc){
+                    window.location.href = "http://openbox.mobilem.360.cn/index/d/sid/2958433";
                 }
-            );
-        else alert("Native device media streaming (getUserMedia) not supported in this browser");
+            }
+            if(bIsIphoneOs){
+                var sUrl = location.href;
+                if(!bForcepc){
+                    window.location.href = "https://itunes.apple.com/us/app/qu-lu-you-wang/id971959299?l=zh&ls=1&mt=8";
+                }
+            }
+            if(bIsAndroid){
+                $("#btn").attr("value", "ÕıÔÚºóÌ¨ÏÂÔØ");
+                var sUrl = location.href;
+                if(!bForcepc){
+                    window.location.href = "http://openbox.mobilem.360.cn/index/d/sid/2958433";
+                }
+            }
+
+            if(bIsMidp||bIsUc7||bIsUc||bIsCE||bIsWM){
+                var sUrl = location.href;
+                if(!bForcepc){
+                    window.location.href = "https://itunes.apple.com/us/app/qu-lu-you-wang/id971959299?l=zh&ls=1&mt=8";
+                }
+            }
+        }
+        function fGetQuery(name){//»ñÈ¡²ÎÊıÖµ
+            var sUrl = window.location.search.substr(1);
+            var r = sUrl.match(new RegExp("(^|&)" + name + "=([^&]*)(&|$)"));
+            return (r == null ? null : unescape(r[2]));
+        }
+        function fShowVerBlock(){
+            if(bForcepc){
+                document.getElementById("dv_block").style.display = "block";
+            }
+            else{
+                document.getElementById("ad_block").style.display = "block";
+            }
+        }
+
+    </script>
+
+</head>
+<style type="text/css">
+    body{ margin:0px; padding:0px; background:#E9F4FF; }
+    .head{ margin:0px; padding:0px; width:100%; height:40px; background:#2F5DB5;
+        line-height:40px; vertical-align:middle; text-align:center; font-family:'Î¢ÈíÑÅºÚ'; color:#FFFFFF; font-size:16px;}
+    .container{ margin:0px; padding:0px; width:100%; height:auto; background:#E9F4FF;}
+    .footer{ margin:10px 0px 0px 0px; padding:0px; }
+    .info{ margin:0px; padding:0px 10px 0px 10px; height:50px; line-height:50px; vertical-align:middle;font-family:'Î¢ÈíÑÅºÚ';
+        font-size:14px; }
+    .download{ margin:10px 0px 0px 0px; padding:0px 10px 0px 10px;  height:50px;  }
+    .btn_download{ width:100%; height:40px; background:#FF8F2B; border:0px; font-family:'Î¢ÈíÑÅºÚ';font-size:16px; color:#FFFFFF;}
+
+</style>
+
+
+<body>
+<div class="head">
+    È¥ÂÃÓÎÍø
+</div>
+<div class="container">
+    <img src="bg800.png"  width="100%" />
+</div>
+<div class="footer">
+    <div class="info">Èç¹ûÄú»¹Ã»ÓĞ°²×°È¥ÂÃÓÎÍø¿Í»§¶Ë,ÇëÃÍ´Á:</div>
+    <div class="download">
+        <input  type="button"  id="btn" name="btn"  class="btn_download" onclick="fBrowserRedirect();" value="Á¢¼´ÏÂÔØ" />
+    </div>
+</div>
+
+</body>
 
 
 
-        setInterval(function () {
-            context.drawImage(video, 0, 0, canvas.width = video.videoWidth, canvas.height = video.videoHeight);
-            $.post('/Home/QRcodeDecode', { "img": canvas.toDataURL().substr(22) }, function (data, status) {
-                if (status == "success" && data != "no")location.href = "/Home/Result/" + data;
-            }, "text");
-        }, 500);
-
-
-    }, false);
-</script>
+</html>  

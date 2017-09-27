@@ -22,8 +22,6 @@ namespace WebFrame.Controllers
                 return Content(Uri.EscapeDataString(result.Text));
             }catch{ return Content("no");}
         }
-
-
         public ActionResult Result(string id) { return View(); }
     }
-}  
+}

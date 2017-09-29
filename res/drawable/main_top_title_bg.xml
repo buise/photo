@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item >
+        <!-- 定义当button获得 focus时的形态 -->
+        <shape>
+            <gradient android:startColor="#ff4d4d4d"
+                android:endColor="#ff232323"
+                android:angle="270"
+                />
+            <stroke android:width="0dp" 
+                    android:color="#00000000"  />
+            <corners 
+                android:radius="0dp"
+                />   
+            <padding android:left="0dp" 
+                     android:top="0dp"
+                     android:bottom="0dp" 
+                     android:right="0dp"/>
+        </shape>
+    </item>
+</selector> 
